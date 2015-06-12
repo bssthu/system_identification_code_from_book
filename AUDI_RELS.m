@@ -1,16 +1,17 @@
 % -*- coding: gbk -*-
-% File          : AUDI-RLS.m
+% File          : AUDI_RLES.m
 % Creation Date : 2015-06-12
-% Description   : AUDI 最小二乘法, chapter 11
+% Description   : AUDI 增广最小二乘法, chapter 11
 % 
 
 for k = 1+n : L+n
     % 构造增广数据向量
     for i = 0:n-1
-        Phi(2*i + 1, k) = -z(k - n - i);
-        Phi(2*i + 2, k) = u(k - n - i);
+        Phi(3*i + 1, k) = -z(k - n + i);
+        Phi(3*i + 2, k) = u(k - n + i);
+        Phi(3*i + 3, k) = v1(k - n + i);
     end
-    Phi(2*n + 1, k) = -z(k);
+    Phi(3*n + 1, k) = -z(k);
     
     % AUDI辨识算法
     f(:, k) = U(:, :, k-1)' * Phi(:, k);
@@ -30,4 +31,7 @@ for k = 1+n : L+n
         
         U(j, j, k) = 1.0;
     end
+    
+    % 噪声估计
+    v1(k) = -f(N, k) / Beta(N+1);
 end

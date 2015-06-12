@@ -1,5 +1,5 @@
 % -*- coding: gbk -*-
-% File          : AUDI-RIV.m
+% File          : AUDI_RIV.m
 % Creation Date : 2015-06-12
 % Description   : AUDI 辅助变量最小二乘法, chapter 11
 % 
@@ -7,11 +7,11 @@
 for k = 1+n : L+n
     % 构造增广数据向量
     for i = 0:n-1
-        Phi(2*i + 1, k) = -z(k - n - i);
-        Phi1(2*i + 1, k) = -x(k - n - i);
+        Phi(2*i + 1, k) = -z(k - n + i);
+        Phi1(2*i + 1, k) = -x(k - n + i);
         h1(2*i + 1, k) = -x(k - n + i);
-        Phi(2*i + 2, k) = u(k - n - i);
-        Phi1(2*i + 2, k) = -x(k - n - i);
+        Phi(2*i + 2, k) = u(k - n + i);
+        Phi1(2*i + 2, k) = -x(k - n + i);
         h1(2*i + 2, k) = u(k - n + i);
     end
     Phi(2*n + 1, k) = -z(k);
